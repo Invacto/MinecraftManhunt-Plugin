@@ -1,4 +1,4 @@
-package me.invacto.huntervsrunner;
+package me.invacto.huntervsrunner.events;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class ItemPickUpEvent implements Listener {
+public class CompassPickUp implements Listener {
 
     @EventHandler
     public void onItemPickUp(EntityPickupItemEvent event) {

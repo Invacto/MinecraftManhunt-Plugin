@@ -1,4 +1,4 @@
-package me.invacto.huntervsrunner;
+package me.invacto.huntervsrunner.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 
-public class ServerReloadEvent implements Listener {
+public class ServerReload implements Listener {
 
     @EventHandler
     public void onServerReload(ServerLoadEvent event) {

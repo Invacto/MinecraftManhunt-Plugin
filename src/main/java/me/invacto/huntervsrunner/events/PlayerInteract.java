@@ -1,5 +1,6 @@
-package me.invacto.huntervsrunner;
+package me.invacto.huntervsrunner.events;
 
+import me.invacto.huntervsrunner.commands.Commands;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

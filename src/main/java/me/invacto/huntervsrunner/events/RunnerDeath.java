@@ -1,5 +1,6 @@
-package me.invacto.huntervsrunner;
+package me.invacto.huntervsrunner.events;
 
+import me.invacto.huntervsrunner.commands.Commands;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class RunnerDeathEvent implements Listener {
+public class RunnerDeath implements Listener {
 
     @EventHandler
     public void onDeathEvent(PlayerDeathEvent event) {

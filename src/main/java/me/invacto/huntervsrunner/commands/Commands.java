@@ -1,5 +1,6 @@
-package me.invacto.huntervsrunner;
+package me.invacto.huntervsrunner.commands;
 
+import me.invacto.huntervsrunner.inventories.GameModifiersMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -118,6 +119,7 @@ public class Commands implements CommandExecutor {
             for (int i = 0; i < (startDuration + 1); i++) {
                 ints.add((startDuration) - i);
 
+                assert plugin != null;
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -210,6 +212,19 @@ public class Commands implements CommandExecutor {
             } catch (NumberFormatException e) {
                 player.sendMessage(ChatColor.RED + "This is not a valid integer!");
             }
+
+        }
+
+        if (cmd.getName().equalsIgnoreCase("mmsettings")) {
+            GameModifiersMenu gui = new GameModifiersMenu();
+
+            //noinspection IfStatementWithIdenticalBranches
+            if (!GameModifiersMenu.menus.isEmpty()) {
+                gui.getInventory().setContents(GameModifiersMenu.menus.get(GameModifiersMenu.uuid.toString()));
+                player.openInventory(gui.getInventory());
+            } else
+                player.openInventory(gui.getInventory());
+
 
         }
 
