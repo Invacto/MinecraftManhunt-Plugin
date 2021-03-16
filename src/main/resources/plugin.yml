@@ -1,0 +1,36 @@
+name: MinecraftManhunt
+version: ${project.version}
+main: me.invacto.huntervsrunner.Main
+api-version: 1.16
+authors: [ Invacto ]
+description: A plugin for Minecraft Manhunt
+commands:
+  runner:
+    description: Makes a player a runner
+    usage: /<command> <USERNAME>
+    aliases: r
+    permission:
+      minecraft.command.op
+  start:
+    description: Starts the game by giving the hunters slowness and blindness for 60 seconds.
+    usage: /<command>
+    aliases: s
+    permission:
+      minecraft.command.op
+  compass:
+    description: Gives the player a compass when they dont have one.
+    usage:  /<command>
+    aliases: c
+  reset:
+    description: Resets everyones inventory along with their health and saturation
+    usage: /<command>
+    aliases: rs
+    permission: minecraft.command.op
+  mm:
+    description: Gives the plugin info and how to use
+    usage: /<command>
+  settimer:
+    description: Sets the start time duration for the runner
+    usage: /<command> <INTEGER>
+    permission: minecraft.command.op
+
