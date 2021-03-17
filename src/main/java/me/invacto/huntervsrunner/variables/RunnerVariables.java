@@ -2,6 +2,7 @@ package me.invacto.huntervsrunner.variables;
 
 public class RunnerVariables {
 
+    public static boolean hasDoubleHealth;
     public static boolean hasDamageBoost;
     public static boolean hasQuickPick;
     public static boolean hasQuickFoot;

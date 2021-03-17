@@ -33,8 +33,20 @@ commands:
     description: Sets the start time duration for the runner
     usage: /<command> <INTEGER>
     permission: minecraft.command.op
-  mmsettings:
-    description: Brings up the manhunt settings
+  runnermods:
+    description: Opens the runner modifiers menu
+    usage: /<command>
+    permission: minecraft.command.op
+  huntermods:
+    description: Opens the hunter modifiers menu
+    usage: /<command>
+    permission: minecraft.command.op
+  globalmods:
+    description: Opens the global modifiers menu
+    usage: /<command>
+    permission: minecraft.command.op
+  mods:
+    description: Opens the modifiers menu
     usage: /<command>
     permission: minecraft.command.op
 

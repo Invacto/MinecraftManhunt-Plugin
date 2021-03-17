@@ -1,11 +1,15 @@
 package me.invacto.huntervsrunner.commands;
 
-import me.invacto.huntervsrunner.inventories.GameModifiersMenu;
+import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
+import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
+import me.invacto.huntervsrunner.inventories.ModifiersMenu;
+import me.invacto.huntervsrunner.inventories.RunnerModifiersMenu;
 import me.invacto.huntervsrunner.variables.RunnerVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -65,7 +69,7 @@ public class Commands implements CommandExecutor {
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-            // ENABLE THIS BACK
+            // ENABLE THIS BACK RIGHT NOW IT IS SENT TO IT CAN START WITH ONLY 1 PERSON
 
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,10 +81,8 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
-            //Creates a collection that contains all players online
             @SuppressWarnings("unchecked") Collection<Player> tempPlayers =  (Collection<Player>) player.getServer().getOnlinePlayers();
 
-            //Converts the player collection to a list
             List<Player> players = new ArrayList<>(tempPlayers);
 
             Player runnerPlayer = player.getServer().getPlayer(runnerName);
@@ -91,7 +93,10 @@ public class Commands implements CommandExecutor {
                     "Manhunt" + ChatColor.GOLD +
                     " has started! Best of luck.");
 
-
+            if (RunnerVariables.hasDoubleHealth) {
+                Objects.requireNonNull(runnerPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(40);
+                runnerPlayer.setHealth(40);
+            }
 
             if (RunnerVariables.hasDamageBoost) {
                 runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0));
@@ -106,7 +111,7 @@ public class Commands implements CommandExecutor {
             }
 
             if (RunnerVariables.hasSaturated) {
-                runnerPlayer.getInventory().addItem(new ItemStack(Material.BREAD, 64));
+                runnerPlayer.getInventory().addItem(new ItemStack(Material.BREAD, 8));
             }
 
             if (RunnerVariables.hasArmorer) {
@@ -117,23 +122,19 @@ public class Commands implements CommandExecutor {
             //All players looped and get full healed
             for (Player value : players) {
 
-                value.setHealth(20);
+                value.setHealth(40);
                 value.setFoodLevel(20);
                 value.setExhaustion(20);
                 value.setSaturation(20);
 
             }
 
-            //Removes the runner from the all players list
             players.remove(player.getServer().getPlayer(runnerName));
 
-            //Runs the updated list without the runner, giving all of the players (hunters) a list of potioneffects
             for (Player value : players) {
 
-                //Creates a collection of potioneffects
                 Collection<PotionEffect> potionEffects = new ArrayList<>();
 
-                //Adds all of the potioneffects needed to the collection
                 potionEffects.add(new PotionEffect(PotionEffectType.BLINDNESS, (startDuration * 20), 255));
                 potionEffects.add(new PotionEffect(PotionEffectType.SLOW, (startDuration * 20), 255));
                 potionEffects.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, (startDuration * 20), 255));
@@ -141,16 +142,13 @@ public class Commands implements CommandExecutor {
                 potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, (startDuration * 20), 200));
                 potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, (startDuration * 20), 255));
 
-                //Creates a itemstack object of a compass
                 ItemStack compass = new ItemStack(Material.COMPASS);
 
-                //Adds both the list of potioneffects and the itemstack (compass)
                 value.addPotionEffects(potionEffects);
                 value.getInventory().addItem(compass);
 
             }
 
-            //Timer that displays the time before the hunters are released
             for (int i = 0; i < (startDuration + 1); i++) {
                 ints.add((startDuration) - i);
 
@@ -191,13 +189,10 @@ public class Commands implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("reset")) {
 
-            //Creates a collection of online players
             @SuppressWarnings("unchecked") Collection<Player> tempPlayers = (Collection<Player>) player.getServer().getOnlinePlayers();
 
-            //Puts player collection in a ArrayList
             List<Player> players = new ArrayList<>(tempPlayers);
 
-            //Clears all player's inventory, full heals and gets rid of all potioneffects
             for (Player value : players) {
 
                 value.getInventory().clear();
@@ -211,12 +206,10 @@ public class Commands implements CommandExecutor {
 
             }
 
-            //Resets the runner name variable
             if (Commands.runnerName != null) {
                 Commands.runnerName = null;
             }
 
-            //Cancels all BukkitRunnable tasks and clears ints list
             assert plugin != null;
             Bukkit.getScheduler().cancelTasks(plugin);
             ints.clear();
@@ -250,16 +243,49 @@ public class Commands implements CommandExecutor {
 
         }
 
-        if (cmd.getName().equalsIgnoreCase("mmsettings")) {
-            GameModifiersMenu gui = new GameModifiersMenu();
+        if (cmd.getName().equalsIgnoreCase("runnermods")) {
+            RunnerModifiersMenu gui = new RunnerModifiersMenu();
 
             //noinspection IfStatementWithIdenticalBranches
-            if (!GameModifiersMenu.menus.isEmpty()) {
-                gui.getInventory().setContents(GameModifiersMenu.menus.get(GameModifiersMenu.uuid.toString()));
+            if (!RunnerModifiersMenu.runnerMenu.isEmpty()) {
+                gui.getInventory().setContents(RunnerModifiersMenu.runnerMenu.get(RunnerModifiersMenu.uuid.toString()));
                 player.openInventory(gui.getInventory());
             } else
                 player.openInventory(gui.getInventory());
 
+
+        }
+
+        if (cmd.getName().equalsIgnoreCase("huntermods")) {
+            HunterModifiersMenu gui = new HunterModifiersMenu();
+
+            //noinspection IfStatementWithIdenticalBranches
+            if (!HunterModifiersMenu.hunterMenu.isEmpty()) {
+                gui.getInventory().setContents(HunterModifiersMenu.hunterMenu.get(HunterModifiersMenu.uuid.toString()));
+                player.openInventory(gui.getInventory());
+            } else
+                player.openInventory(gui.getInventory());
+
+
+        }
+
+        if (cmd.getName().equalsIgnoreCase("globalmods")) {
+            GlobalModifiersMenu gui = new GlobalModifiersMenu();
+
+            //noinspection IfStatementWithIdenticalBranches
+            if (!GlobalModifiersMenu.globalMenu.isEmpty()) {
+                gui.getInventory().setContents(GlobalModifiersMenu.globalMenu.get(GlobalModifiersMenu.uuid.toString()));
+                player.openInventory(gui.getInventory());
+            } else
+                player.openInventory(gui.getInventory());
+
+
+        }
+
+        if (cmd.getName().equalsIgnoreCase("mods")) {
+            ModifiersMenu gui = new ModifiersMenu();
+
+            player.openInventory(gui.getInventory());
 
         }
 

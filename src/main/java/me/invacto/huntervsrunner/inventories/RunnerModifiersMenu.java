@@ -10,15 +10,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-public class GameModifiersMenu implements InventoryHolder {
+public class RunnerModifiersMenu implements InventoryHolder {
 
     private final Inventory inv;
     public static UUID uuid = UUID.randomUUID();
 
-    public static Map<String, ItemStack[]> menus = new HashMap<>();
+    public static Map<String, ItemStack[]> runnerMenu = new HashMap<>();
 
-    public GameModifiersMenu() {
-        inv = Bukkit.createInventory(this, 27, "Game Modifiers Menu");
+    public RunnerModifiersMenu() {
+        inv = Bukkit.createInventory(this, 27, "Runner Modifiers Menu");
         init();
     }
 
@@ -29,17 +29,22 @@ public class GameModifiersMenu implements InventoryHolder {
             inv.setItem(i, fill);
         }
 
+        ItemStack doubleHealth = createItem(Material.GOLDEN_APPLE, ChatColor.BOLD + "Double Health", Collections.singletonList("Enables double health for the Runner"));
         ItemStack bloodLust = createItem(Material.REDSTONE, ChatColor.BOLD + "Bloodlust", Collections.singletonList("Enables damage boost for the Runner"));
         ItemStack quickPick = createItem(Material.GOLDEN_PICKAXE, ChatColor.BOLD + "Quickpick", Collections.singletonList("Enables haste for the Runner"));
         ItemStack quickFoot = createItem(Material.SUGAR, ChatColor.BOLD + "Quickfoot", Collections.singletonList("Enables speed for the Runner"));
         ItemStack startFood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
         ItemStack startArmor = createItem(Material.IRON_CHESTPLATE, ChatColor.BOLD + "Armored", Collections.singletonList("Gives the Runner starting armor"));
 
-        inv.setItem(9, bloodLust);
-        inv.setItem(11, quickPick);
-        inv.setItem(13, quickFoot);
+        inv.setItem(10, doubleHealth);
+        inv.setItem(11, bloodLust);
+        inv.setItem(12, quickPick);
+        inv.setItem(14, quickFoot);
         inv.setItem(15, startFood);
-        inv.setItem(17, startArmor);
+        inv.setItem(16, startArmor);
+
+        ItemStack goBack = createItem(Material.ARROW, "Go back", null);
+        inv.setItem(22, goBack);
 
     }
 
@@ -55,9 +60,6 @@ public class GameModifiersMenu implements InventoryHolder {
         return item;
     }
 
-
     @Override
-    public Inventory getInventory() {
-        return inv;
-    }
+    public Inventory getInventory() { return inv; }
 }
