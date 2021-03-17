@@ -8,6 +8,4 @@ public class RunnerVariables {
     public static boolean hasSaturated;
     public static boolean hasArmorer;
 
-
-
 }
