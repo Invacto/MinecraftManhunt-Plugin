@@ -14,7 +14,7 @@ public class EnderDragonDeath implements Listener {
     @EventHandler
     public void onEnderDragonDeath(EntityDeathEvent event) {
 
-        if (event.getEntity().getType() == EntityType.ENDER_DRAGON) { return; }
+        if (event.getEntity().getType() != EntityType.ENDER_DRAGON) { return; }
 
         EnderDragon enderDragon = (EnderDragon) event.getEntity();
 

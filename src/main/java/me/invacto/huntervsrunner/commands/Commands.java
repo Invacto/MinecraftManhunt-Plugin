@@ -1,6 +1,7 @@
 package me.invacto.huntervsrunner.commands;
 
 import me.invacto.huntervsrunner.inventories.GameModifiersMenu;
+import me.invacto.huntervsrunner.variables.RunnerVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -61,8 +62,17 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // ENABLE THIS BACK
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             //Checks if the server has 2 or more people, else it returns and tells the sender that there is only 1 person
-            if (player.getServer().getOnlinePlayers().size() < 2) {
+            if (player.getServer().getOnlinePlayers().size() > 2) {
                 player.sendMessage(ChatColor.RED + "There is needs to be at least 2 people on the server!");
                 return true;
             }
@@ -73,11 +83,36 @@ public class Commands implements CommandExecutor {
             //Converts the player collection to a list
             List<Player> players = new ArrayList<>(tempPlayers);
 
-            //Sends a message to just the runner that the manhunt has started
-            Objects.requireNonNull(player.getServer().getPlayer(runnerName)).sendMessage(ChatColor.GOLD +
+            Player runnerPlayer = player.getServer().getPlayer(runnerName);
+
+            assert runnerPlayer != null;
+            runnerPlayer.sendMessage(ChatColor.GOLD +
                     "The " + ChatColor.DARK_BLUE +
                     "Manhunt" + ChatColor.GOLD +
                     " has started! Best of luck.");
+
+
+
+            if (RunnerVariables.hasDamageBoost) {
+                runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0));
+            }
+
+            if (RunnerVariables.hasQuickPick) {
+                runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 0));
+            }
+
+            if (RunnerVariables.hasQuickFoot) {
+                runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+            }
+
+            if (RunnerVariables.hasSaturated) {
+                runnerPlayer.getInventory().addItem(new ItemStack(Material.BREAD, 64));
+            }
+
+            if (RunnerVariables.hasArmorer) {
+                runnerPlayer.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+            }
+
 
             //All players looped and get full healed
             for (Player value : players) {

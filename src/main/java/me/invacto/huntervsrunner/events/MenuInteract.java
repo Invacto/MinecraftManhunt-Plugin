@@ -1,6 +1,8 @@
 package me.invacto.huntervsrunner.events;
 
 import me.invacto.huntervsrunner.inventories.GameModifiersMenu;
+import me.invacto.huntervsrunner.variables.RunnerVariables;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -37,11 +39,62 @@ public class MenuInteract implements Listener {
                 if (Objects.requireNonNull(item.getItemMeta()).hasEnchant(Enchantment.ARROW_DAMAGE)) {
                     item.removeEnchantment(Enchantment.ARROW_DAMAGE);
 
+                    if (item.getType() == Material.REDSTONE) {
+                        RunnerVariables.hasDamageBoost = false;
+                        player.sendMessage(ChatColor.GOLD + "Damage boost has been disabled.");
+                    }
+
+                    if (item.getType() == Material.GOLDEN_PICKAXE) {
+                        RunnerVariables.hasQuickPick = false;
+                        player.sendMessage(ChatColor.GOLD + "Quick pick has been disabled.");
+                    }
+
+                    if (item.getType() == Material.SUGAR) {
+                        RunnerVariables.hasQuickFoot = false;
+                        player.sendMessage(ChatColor.GOLD + "Quick foot has been disabled.");
+                    }
+
+                    if (item.getType() == Material.GOLDEN_CARROT) {
+                        RunnerVariables.hasSaturated = false;
+                        player.sendMessage(ChatColor.GOLD + "Saturated has been disabled.");
+                    }
+
+                    if (item.getType() == Material.IRON_CHESTPLATE) {
+                        RunnerVariables.hasArmorer = false;
+                        player.sendMessage(ChatColor.GOLD + "Armorer has been disabled.");
+                    }
+
+
                 } else {
                     item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
                     ItemMeta meta = item.getItemMeta();
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     item.setItemMeta(meta);
+
+                    if (item.getType() == Material.REDSTONE) {
+                        RunnerVariables.hasDamageBoost = true;
+                        player.sendMessage(ChatColor.GOLD + "Damage boost has been enabled.");
+                    }
+
+                    if (item.getType() == Material.GOLDEN_PICKAXE) {
+                        RunnerVariables.hasQuickPick = true;
+                        player.sendMessage(ChatColor.GOLD + "Quick pick has been enabled.");
+                    }
+
+                    if (item.getType() == Material.SUGAR) {
+                        RunnerVariables.hasQuickFoot = true;
+                        player.sendMessage(ChatColor.GOLD + "Quick foot has been enabled.");
+                    }
+
+                    if (item.getType() == Material.GOLDEN_CARROT) {
+                        RunnerVariables.hasSaturated = true;
+                        player.sendMessage(ChatColor.GOLD + "Saturated has been enabled.");
+                    }
+
+                    if (item.getType() == Material.IRON_CHESTPLATE) {
+                        RunnerVariables.hasArmorer = true;
+                        player.sendMessage(ChatColor.GOLD + "Armorer has been enabled.");
+                    }
 
                 }
 

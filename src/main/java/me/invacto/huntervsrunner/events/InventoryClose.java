@@ -9,7 +9,7 @@ public class InventoryClose implements Listener {
 
     @EventHandler
     public void onGuiClose(InventoryCloseEvent event) {
-        if (event.getView().getTitle().contains("Game Rule Menu")) {
+        if (event.getView().getTitle().contains("Game Modifiers Menu")) {
             GameModifiersMenu.menus.put(GameModifiersMenu.uuid.toString(), event.getInventory().getContents());
 
         }

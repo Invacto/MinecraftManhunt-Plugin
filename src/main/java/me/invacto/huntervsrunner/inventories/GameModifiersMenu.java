@@ -29,14 +29,17 @@ public class GameModifiersMenu implements InventoryHolder {
             inv.setItem(i, fill);
         }
 
-        ItemStack bloodlust = createItem(Material.REDSTONE_BLOCK, ChatColor.BOLD + "Bloodlust", Collections.singletonList("Enables double damage for the Runner"));
-        ItemStack quickfoot = createItem(Material.SUGAR, ChatColor.BOLD + "Quickfoot", Collections.singletonList("Enables speed 1 for the Runner"));
-        ItemStack quickpick = createItem(Material.GOLDEN_PICKAXE, ChatColor.BOLD + "Quickpick", Collections.singletonList("Enables haste 1 for the Runner"));
-        ItemStack startfood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
-        inv.setItem(10, bloodlust);
-        inv.setItem(12, quickfoot);
-        inv.setItem(14, quickpick);
-        inv.setItem(16, startfood);
+        ItemStack bloodLust = createItem(Material.REDSTONE, ChatColor.BOLD + "Bloodlust", Collections.singletonList("Enables damage boost for the Runner"));
+        ItemStack quickPick = createItem(Material.GOLDEN_PICKAXE, ChatColor.BOLD + "Quickpick", Collections.singletonList("Enables haste for the Runner"));
+        ItemStack quickFoot = createItem(Material.SUGAR, ChatColor.BOLD + "Quickfoot", Collections.singletonList("Enables speed for the Runner"));
+        ItemStack startFood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
+        ItemStack startArmor = createItem(Material.IRON_CHESTPLATE, ChatColor.BOLD + "Armored", Collections.singletonList("Gives the Runner starting armor"));
+
+        inv.setItem(9, bloodLust);
+        inv.setItem(11, quickPick);
+        inv.setItem(13, quickFoot);
+        inv.setItem(15, startFood);
+        inv.setItem(17, startArmor);
 
     }
 
