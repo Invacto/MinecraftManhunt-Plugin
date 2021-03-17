@@ -33,9 +33,6 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("reset")).setExecutor(commands);
         Objects.requireNonNull(getCommand("mm")).setExecutor(commands);
         Objects.requireNonNull(getCommand("settimer")).setExecutor(commands);
-        Objects.requireNonNull(getCommand("runnermods")).setExecutor(commands);
-        Objects.requireNonNull(getCommand("huntermods")).setExecutor(commands);
-        Objects.requireNonNull(getCommand("globalmods")).setExecutor(commands);
         Objects.requireNonNull(getCommand("mods")).setExecutor(commands);
 
         System.out.println("HunterVsRunner is now enabled.");

@@ -18,7 +18,7 @@ public class ModifiersMenu implements InventoryHolder {
     }
 
     public void init() {
-        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "", Collections.singletonList(""));
+        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, " ", Collections.singletonList(""));
 
         for (int i = 0; i < inv.getSize(); i++) {
             inv.setItem(i, fill);

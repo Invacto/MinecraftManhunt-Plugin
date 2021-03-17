@@ -11,7 +11,7 @@ import java.util.*;
 
 public class GlobalModifiersMenu implements InventoryHolder {
 
-    private final Inventory inv;
+    public static Inventory inv;
     public static UUID uuid = UUID.randomUUID();
 
     public static Map<String, ItemStack[]> globalMenu = new HashMap<>();
@@ -22,7 +22,7 @@ public class GlobalModifiersMenu implements InventoryHolder {
     }
 
     public void init() {
-        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "", Collections.singletonList(""));
+        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, " ", Collections.singletonList(""));
 
         for (int i = 0; i < inv.getSize(); i++) {
             inv.setItem(i, fill);

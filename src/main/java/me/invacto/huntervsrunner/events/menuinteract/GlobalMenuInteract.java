@@ -35,6 +35,12 @@ public class GlobalMenuInteract implements Listener {
                 ItemStack item = event.getCurrentItem();
                 int index = event.getSlot();
 
+                if (item.getType() == Material.ARROW) {
+                    ModifiersMenu gui = new ModifiersMenu();
+                    player.openInventory(gui.getInventory());
+                    return;
+                }
+
                 if (Objects.requireNonNull(item.getItemMeta()).hasEnchant(Enchantment.ARROW_DAMAGE)) {
                     item.removeEnchantment(Enchantment.ARROW_DAMAGE);
 
@@ -53,12 +59,6 @@ public class GlobalMenuInteract implements Listener {
 
                     ////////////////////////////////////////////////////////////////////////////////
 
-                }
-
-                if (item.getType() == Material.ARROW) {
-                    ModifiersMenu gui = new ModifiersMenu();
-                    player.openInventory(gui.getInventory());
-                    return;
                 }
 
                 inventory.setItem(index, item);

@@ -196,6 +196,7 @@ public class Commands implements CommandExecutor {
             for (Player value : players) {
 
                 value.getInventory().clear();
+                Objects.requireNonNull(value.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(20);
                 value.setHealth(20);
                 value.setSaturation(20);
                 value.setExhaustion(20);
@@ -209,6 +210,13 @@ public class Commands implements CommandExecutor {
             if (Commands.runnerName != null) {
                 Commands.runnerName = null;
             }
+
+            RunnerVariables.hasDoubleHealth = false;
+            RunnerVariables.hasDamageBoost = false;
+            RunnerVariables.hasQuickFoot = false;
+            RunnerVariables.hasQuickPick = false;
+            RunnerVariables.hasArmorer = false;
+            RunnerVariables.hasSaturated = false;
 
             assert plugin != null;
             Bukkit.getScheduler().cancelTasks(plugin);
@@ -243,49 +251,38 @@ public class Commands implements CommandExecutor {
 
         }
 
-        if (cmd.getName().equalsIgnoreCase("runnermods")) {
-            RunnerModifiersMenu gui = new RunnerModifiersMenu();
+        if (cmd.getName().equalsIgnoreCase("mods")) {
+
+            RunnerModifiersMenu runnerGui = new RunnerModifiersMenu();
 
             //noinspection IfStatementWithIdenticalBranches
             if (!RunnerModifiersMenu.runnerMenu.isEmpty()) {
-                gui.getInventory().setContents(RunnerModifiersMenu.runnerMenu.get(RunnerModifiersMenu.uuid.toString()));
-                player.openInventory(gui.getInventory());
+                runnerGui.getInventory().setContents(RunnerModifiersMenu.runnerMenu.get(RunnerModifiersMenu.uuid.toString()));
+                player.openInventory(runnerGui.getInventory());
             } else
-                player.openInventory(gui.getInventory());
+                player.openInventory(runnerGui.getInventory());
 
-
-        }
-
-        if (cmd.getName().equalsIgnoreCase("huntermods")) {
-            HunterModifiersMenu gui = new HunterModifiersMenu();
-
-            //noinspection IfStatementWithIdenticalBranches
-            if (!HunterModifiersMenu.hunterMenu.isEmpty()) {
-                gui.getInventory().setContents(HunterModifiersMenu.hunterMenu.get(HunterModifiersMenu.uuid.toString()));
-                player.openInventory(gui.getInventory());
-            } else
-                player.openInventory(gui.getInventory());
-
-
-        }
-
-        if (cmd.getName().equalsIgnoreCase("globalmods")) {
-            GlobalModifiersMenu gui = new GlobalModifiersMenu();
+            GlobalModifiersMenu globalGui = new GlobalModifiersMenu();
 
             //noinspection IfStatementWithIdenticalBranches
             if (!GlobalModifiersMenu.globalMenu.isEmpty()) {
-                gui.getInventory().setContents(GlobalModifiersMenu.globalMenu.get(GlobalModifiersMenu.uuid.toString()));
-                player.openInventory(gui.getInventory());
+                globalGui.getInventory().setContents(GlobalModifiersMenu.globalMenu.get(GlobalModifiersMenu.uuid.toString()));
+                player.openInventory(globalGui.getInventory());
             } else
-                player.openInventory(gui.getInventory());
+                player.openInventory(globalGui.getInventory());
 
+            HunterModifiersMenu hunterGui = new HunterModifiersMenu();
 
-        }
+            //noinspection IfStatementWithIdenticalBranches
+            if (!HunterModifiersMenu.hunterMenu.isEmpty()) {
+                hunterGui.getInventory().setContents(HunterModifiersMenu.hunterMenu.get(HunterModifiersMenu.uuid.toString()));
+                player.openInventory(hunterGui.getInventory());
+            } else
+                player.openInventory(hunterGui.getInventory());
+            
+            ModifiersMenu modsGui = new ModifiersMenu();
 
-        if (cmd.getName().equalsIgnoreCase("mods")) {
-            ModifiersMenu gui = new ModifiersMenu();
-
-            player.openInventory(gui.getInventory());
+            player.openInventory(modsGui.getInventory());
 
         }
 

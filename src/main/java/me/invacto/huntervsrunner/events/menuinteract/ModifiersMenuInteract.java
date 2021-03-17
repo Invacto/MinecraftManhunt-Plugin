@@ -30,18 +30,15 @@ public class ModifiersMenuInteract implements Listener {
                 ItemStack item = event.getCurrentItem();
 
                 if (item.getType() == Material.IRON_BOOTS) {
-                    RunnerModifiersMenu gui = new RunnerModifiersMenu();
-                    player.openInventory(gui.getInventory());
+                    player.openInventory(RunnerModifiersMenu.inv);
                 }
 
                 if (item.getType() == Material.PLAYER_HEAD) {
-                    GlobalModifiersMenu gui = new GlobalModifiersMenu();
-                    player.openInventory(gui.getInventory());
+                    player.openInventory(GlobalModifiersMenu.inv);
                 }
 
                 if (item.getType() == Material.IRON_SWORD) {
-                    HunterModifiersMenu gui = new HunterModifiersMenu();
-                    player.openInventory(gui.getInventory());
+                    player.openInventory(HunterModifiersMenu.inv);
                 }
 
                 if (item.getType() == Material.ARROW) {
