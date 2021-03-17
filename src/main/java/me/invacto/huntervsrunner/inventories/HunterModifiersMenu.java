@@ -29,6 +29,9 @@ public class HunterModifiersMenu implements InventoryHolder {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
+        ItemStack glowing = createItem(Material.GLOWSTONE_DUST, "Glowing", Collections.singletonList("Gives all of the Hunters a perma glowing effect."));
+        inv.setItem(13, glowing);
+
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);
         inv.setItem(22, goBack);
 

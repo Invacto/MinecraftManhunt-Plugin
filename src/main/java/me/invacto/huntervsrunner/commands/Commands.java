@@ -4,6 +4,8 @@ import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
 import me.invacto.huntervsrunner.inventories.RunnerModifiersMenu;
+import me.invacto.huntervsrunner.variables.GlobalVariables;
+import me.invacto.huntervsrunner.variables.HunterVariables;
 import me.invacto.huntervsrunner.variables.RunnerVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -122,10 +124,28 @@ public class Commands implements CommandExecutor {
             //All players looped and get full healed
             for (Player value : players) {
 
-                value.setHealth(40);
+                if (Objects.requireNonNull(value.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue() == 40) {
+                    value.setHealth(40);
+                } else {
+                    value.setHealth(20);
+                }
+
                 value.setFoodLevel(20);
                 value.setExhaustion(20);
                 value.setSaturation(20);
+
+                if (GlobalVariables.stoneTools) {
+                    ArrayList<ItemStack> tools = new ArrayList<>();
+                    tools.add(new ItemStack(Material.STONE_SWORD));
+                    tools.add(new ItemStack(Material.STONE_PICKAXE));
+                    tools.add(new ItemStack(Material.STONE_AXE));
+                    tools.add(new ItemStack(Material.STONE_SHOVEL));
+
+                    for (ItemStack tool : tools) {
+                        value.getInventory().addItem(tool);
+                    }
+
+                }
 
             }
 
@@ -141,6 +161,10 @@ public class Commands implements CommandExecutor {
                 potionEffects.add(new PotionEffect(PotionEffectType.JUMP, (startDuration * 20), 200));
                 potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, (startDuration * 20), 200));
                 potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, (startDuration * 20), 255));
+
+                if (HunterVariables.hasGlowing) {
+                    value.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
+                }
 
                 ItemStack compass = new ItemStack(Material.COMPASS);
 
@@ -210,13 +234,6 @@ public class Commands implements CommandExecutor {
             if (Commands.runnerName != null) {
                 Commands.runnerName = null;
             }
-
-            RunnerVariables.hasDoubleHealth = false;
-            RunnerVariables.hasDamageBoost = false;
-            RunnerVariables.hasQuickFoot = false;
-            RunnerVariables.hasQuickPick = false;
-            RunnerVariables.hasArmorer = false;
-            RunnerVariables.hasSaturated = false;
 
             assert plugin != null;
             Bukkit.getScheduler().cancelTasks(plugin);

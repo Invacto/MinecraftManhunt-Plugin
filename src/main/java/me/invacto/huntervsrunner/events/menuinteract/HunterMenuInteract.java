@@ -2,6 +2,9 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
+import me.invacto.huntervsrunner.variables.HunterVariables;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -46,6 +49,11 @@ public class HunterMenuInteract implements Listener {
 
                     ////////////////////////////////////////////////////////////////////////////////
 
+                    if (item.getType() == Material.GLOWSTONE_DUST) {
+                        HunterVariables.hasGlowing = false;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been disabled");
+                    }
+
                     ////////////////////////////////////////////////////////////////////////////////
 
                 } else {
@@ -56,6 +64,11 @@ public class HunterMenuInteract implements Listener {
                     item.setItemMeta(meta);
 
                     ////////////////////////////////////////////////////////////////////////////////
+
+                    if (item.getType() == Material.GLOWSTONE_DUST) {
+                        HunterVariables.hasGlowing = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been enabled");
+                    }
 
                     ////////////////////////////////////////////////////////////////////////////////
 

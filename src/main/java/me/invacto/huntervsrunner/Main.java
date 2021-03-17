@@ -27,6 +27,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GlobalMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new ModifiersMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new InventoryClose(), this);
+        getServer().getPluginManager().registerEvents(new RespawnHunter(), this);
         Objects.requireNonNull(getCommand("runner")).setExecutor(commands);
         Objects.requireNonNull(getCommand("start")).setExecutor(commands);
         Objects.requireNonNull(getCommand("compass")).setExecutor(commands);

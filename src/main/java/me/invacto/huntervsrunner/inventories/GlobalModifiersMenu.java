@@ -30,6 +30,9 @@ public class GlobalModifiersMenu implements InventoryHolder {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
+        ItemStack stoneTools = createItem(Material.STONE_PICKAXE, "Stone Tools", Collections.singletonList("All players start with stone tools"));
+        inv.setItem(13, stoneTools);
+
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);
         inv.setItem(22, goBack);
 

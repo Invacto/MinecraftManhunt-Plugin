@@ -2,6 +2,9 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
+import me.invacto.huntervsrunner.variables.GlobalVariables;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -46,6 +49,12 @@ public class GlobalMenuInteract implements Listener {
 
                     ////////////////////////////////////////////////////////////////////////////////
 
+                    if (item.getType() == Material.STONE_PICKAXE) {
+                        GlobalVariables.stoneTools = false;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Stone tools has been disabled");
+
+                    }
+
                     ////////////////////////////////////////////////////////////////////////////////
 
                 } else {
@@ -56,6 +65,11 @@ public class GlobalMenuInteract implements Listener {
                     item.setItemMeta(meta);
 
                     ////////////////////////////////////////////////////////////////////////////////
+
+                    if (item.getType() == Material.STONE_PICKAXE) {
+                        GlobalVariables.stoneTools = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Stone tools has been enabled");
+                    }
 
                     ////////////////////////////////////////////////////////////////////////////////
 
