@@ -4,5 +4,6 @@ package me.invacto.huntervsrunner.variables;
 public class GlobalVariables {
 
     public static boolean stoneTools;
+    public static boolean leatherArmor;
 
 }

@@ -147,6 +147,20 @@ public class Commands implements CommandExecutor {
 
                 }
 
+                if (GlobalVariables.leatherArmor) {
+                    ArrayList<ItemStack> armor = new ArrayList<>();
+                    armor.add(new ItemStack(Material.LEATHER_HELMET));
+                    armor.add(new ItemStack(Material.LEATHER_CHESTPLATE));
+                    armor.add(new ItemStack(Material.LEATHER_LEGGINGS));
+                    armor.add(new ItemStack(Material.LEATHER_BOOTS));
+
+                    for (ItemStack armorPiece : armor) {
+                        value.getInventory().addItem(armorPiece);
+                    }
+
+
+                }
+
             }
 
             players.remove(player.getServer().getPlayer(runnerName));

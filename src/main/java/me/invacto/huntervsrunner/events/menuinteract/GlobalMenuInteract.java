@@ -55,6 +55,12 @@ public class GlobalMenuInteract implements Listener {
 
                     }
 
+                    if (item.getType() == Material.STONE_PICKAXE) {
+                        GlobalVariables.leatherArmor = false;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Leather armor has been disabled");
+
+                    }
+
                     ////////////////////////////////////////////////////////////////////////////////
 
                 } else {
@@ -70,6 +76,13 @@ public class GlobalMenuInteract implements Listener {
                         GlobalVariables.stoneTools = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Stone tools has been enabled");
                     }
+
+                    if (item.getType() == Material.LEATHER_CHESTPLATE) {
+                        GlobalVariables.leatherArmor = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Leather armor has been enabled");
+
+                    }
+
 
                     ////////////////////////////////////////////////////////////////////////////////
 
