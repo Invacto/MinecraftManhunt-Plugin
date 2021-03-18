@@ -41,7 +41,7 @@ public class ModifiersMenuInteract implements Listener {
                     player.openInventory(HunterModifiersMenu.inv);
                 }
 
-                if (item.getType() == Material.ARROW) {
+                if (item.getType() == Material.BARRIER) {
                     player.closeInventory();
                 }
 

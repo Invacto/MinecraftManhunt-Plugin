@@ -184,9 +184,11 @@ public class Commands implements CommandExecutor {
                             Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "The hunt begins");
                             Bukkit.getServer().getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 3.0F, 1.0F));
 
-                        } else {
+                        } else if (ints.get(0) < 11) {
                             Bukkit.getServer().broadcastMessage(ChatColor.GOLD + (ints.get(0) + " Seconds left"));
                             Bukkit.getServer().getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 3.0F, 1.0F));
+                        } else {
+                            Bukkit.getServer().broadcastMessage(ChatColor.GOLD + (ints.get(0) + " Seconds left"));
                         }
 
                         ints.remove(0);
@@ -234,6 +236,8 @@ public class Commands implements CommandExecutor {
             if (Commands.runnerName != null) {
                 Commands.runnerName = null;
             }
+
+            startDuration = 60;
 
             assert plugin != null;
             Bukkit.getScheduler().cancelTasks(plugin);
@@ -302,8 +306,6 @@ public class Commands implements CommandExecutor {
             player.openInventory(modsGui.getInventory());
 
         }
-
-
 
         return true;
     }

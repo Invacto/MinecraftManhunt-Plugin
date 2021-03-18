@@ -79,6 +79,7 @@ public class RunnerMenuInteract implements Listener {
 
 
                 } else {
+                    
                     item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
                     ItemMeta meta = item.getItemMeta();
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

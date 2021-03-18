@@ -18,7 +18,7 @@ public class ModifiersMenu implements InventoryHolder {
     }
 
     public void init() {
-        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, " ", Collections.singletonList(""));
+        ItemStack fill = createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, " ", null);
 
         for (int i = 0; i < inv.getSize(); i++) {
             inv.setItem(i, fill);
@@ -35,7 +35,7 @@ public class ModifiersMenu implements InventoryHolder {
         ItemStack hunterSide = createItem(Material.IRON_SWORD, "Hunter modifiers", Collections.singletonList("Opens the Hunter modifiers menu"));
         inv.setItem(15, hunterSide);
 
-        ItemStack goBack = createItem(Material.ARROW, "Go back", null);
+        ItemStack goBack = createItem(Material.BARRIER, "Go back", null);
         inv.setItem(22, goBack);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
