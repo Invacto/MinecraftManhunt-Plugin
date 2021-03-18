@@ -180,6 +180,11 @@ public class Commands implements CommandExecutor {
                     value.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
                 }
 
+                if (HunterVariables.hasSlowness) {
+                    value.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 0));
+                    value.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, 16));
+                }
+
                 ItemStack compass = new ItemStack(Material.COMPASS);
 
                 value.addPotionEffects(potionEffects);

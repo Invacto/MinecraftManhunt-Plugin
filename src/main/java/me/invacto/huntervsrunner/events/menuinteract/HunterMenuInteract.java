@@ -54,6 +54,11 @@ public class HunterMenuInteract implements Listener {
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been disabled");
                     }
 
+                    if (item.getType() == Material.ENDER_PEARL) {
+                        HunterVariables.hasGlowing = false;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Ender travel has been disabled");
+                    }
+
                     ////////////////////////////////////////////////////////////////////////////////
 
                 } else {
@@ -69,6 +74,12 @@ public class HunterMenuInteract implements Listener {
                         HunterVariables.hasGlowing = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been enabled");
                     }
+
+                    if (item.getType() == Material.ENDER_PEARL) {
+                        HunterVariables.hasGlowing = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Ender travel has been enabled");
+                    }
+
 
                     ////////////////////////////////////////////////////////////////////////////////
 

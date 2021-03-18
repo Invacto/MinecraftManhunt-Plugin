@@ -4,5 +4,6 @@ package me.invacto.huntervsrunner.variables;
 public class HunterVariables {
 
     public static boolean hasGlowing;
+    public static boolean hasSlowness;
 
 }
