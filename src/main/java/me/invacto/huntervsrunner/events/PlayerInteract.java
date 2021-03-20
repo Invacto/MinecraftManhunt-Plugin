@@ -1,10 +1,8 @@
 package me.invacto.huntervsrunner.events;
 
 import me.invacto.huntervsrunner.commands.Commands;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import me.invacto.huntervsrunner.variables.RunnerModVariables;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -67,6 +65,37 @@ public class PlayerInteract implements Listener {
             }
 
         }
+
+        if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
+            if (item != null && item.getType() == Material.COMPASS) {
+
+                if (event.getPlayer() != Bukkit.getServer().getPlayer(runnerName)) { return; }
+
+                if (!RunnerModVariables.hasFortressTracker) return;
+
+                Location loc = player.getWorld().locateNearestStructure(player.getLocation(), StructureType.NETHER_FORTRESS, 625, false);
+
+                if (loc == null) {
+                    player.sendMessage(ChatColor.RED + "There is no nether fortress found!");
+                    return;
+                }
+
+                CompassMeta compassMeta = (CompassMeta) item.getItemMeta();
+
+                assert compassMeta != null;
+                compassMeta.setLodestone(loc);
+                compassMeta.setLodestoneTracked(false);
+
+                item.setItemMeta(compassMeta);
+
+                player.sendMessage(ChatColor.GOLD + "You are now tracking the closest nether fortress");
+
+            }
+
+        }
+
+
+
 
     }
 }

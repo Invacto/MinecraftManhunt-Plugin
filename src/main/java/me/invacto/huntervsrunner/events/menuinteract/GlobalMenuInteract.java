@@ -2,7 +2,7 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
-import me.invacto.huntervsrunner.variables.GlobalVariables;
+import me.invacto.huntervsrunner.variables.GlobalModVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -49,15 +49,21 @@ public class GlobalMenuInteract implements Listener {
 
                     ////////////////////////////////////////////////////////////////////////////////
 
-                    if (item.getType() == Material.STONE_PICKAXE) {
-                        GlobalVariables.stoneTools = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Stone tools has been disabled");
+                    if (item.getType() == Material.ENCHANTED_BOOK) {
+                        GlobalModVariables.hasRecipes = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Custom recipes has been disabled");
 
                     }
 
                     if (item.getType() == Material.STONE_PICKAXE) {
-                        GlobalVariables.leatherArmor = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Leather armor has been disabled");
+                        GlobalModVariables.stoneTools = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Stone tools has been disabled");
+
+                    }
+
+                    if (item.getType() == Material.LEATHER_CHESTPLATE) {
+                        GlobalModVariables.leatherArmor = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Leather armor has been disabled");
 
                     }
 
@@ -72,13 +78,19 @@ public class GlobalMenuInteract implements Listener {
 
                     ////////////////////////////////////////////////////////////////////////////////
 
+                    if (item.getType() == Material.ENCHANTED_BOOK) {
+                        GlobalModVariables.hasRecipes = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Custom recipes has been enabled");
+
+                    }
+
                     if (item.getType() == Material.STONE_PICKAXE) {
-                        GlobalVariables.stoneTools = true;
+                        GlobalModVariables.stoneTools = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Stone tools has been enabled");
                     }
 
                     if (item.getType() == Material.LEATHER_CHESTPLATE) {
-                        GlobalVariables.leatherArmor = true;
+                        GlobalModVariables.leatherArmor = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Leather armor has been enabled");
 
                     }

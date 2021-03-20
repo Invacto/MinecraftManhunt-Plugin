@@ -2,7 +2,7 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
 import me.invacto.huntervsrunner.inventories.RunnerModifiersMenu;
-import me.invacto.huntervsrunner.variables.RunnerVariables;
+import me.invacto.huntervsrunner.variables.RunnerModVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -47,34 +47,39 @@ public class RunnerMenuInteract implements Listener {
                 if (Objects.requireNonNull(item.getItemMeta()).hasEnchant(Enchantment.ARROW_DAMAGE)) {
                     item.removeEnchantment(Enchantment.ARROW_DAMAGE);
 
+                    if (item.getType() == Material.COMPASS) {
+                        RunnerModVariables.hasFortressTracker = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Fortress tracker has been disabled.");
+                    }
+
                     if (item.getType() == Material.GOLDEN_APPLE) {
-                        RunnerVariables.hasDoubleHealth = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Double health has been disabled.");
+                        RunnerModVariables.hasDoubleHealth = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Double health has been disabled.");
                     }
 
                     if (item.getType() == Material.REDSTONE) {
-                        RunnerVariables.hasDamageBoost = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Damage boost has been disabled.");
+                        RunnerModVariables.hasDamageBoost = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Damage boost has been disabled.");
                     }
 
                     if (item.getType() == Material.GOLDEN_PICKAXE) {
-                        RunnerVariables.hasQuickPick = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Quick pick has been disabled.");
+                        RunnerModVariables.hasQuickPick = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Quick pick has been disabled.");
                     }
 
                     if (item.getType() == Material.SUGAR) {
-                        RunnerVariables.hasQuickFoot = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Quick foot has been disabled.");
+                        RunnerModVariables.hasQuickFoot = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Quick foot has been disabled.");
                     }
 
                     if (item.getType() == Material.GOLDEN_CARROT) {
-                        RunnerVariables.hasSaturated = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Saturated has been disabled.");
+                        RunnerModVariables.hasSaturated = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Saturated has been disabled.");
                     }
 
                     if (item.getType() == Material.IRON_CHESTPLATE) {
-                        RunnerVariables.hasArmorer = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Armorer has been disabled.");
+                        RunnerModVariables.hasArmorer = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Armorer has been disabled.");
                     }
 
 
@@ -85,33 +90,39 @@ public class RunnerMenuInteract implements Listener {
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     item.setItemMeta(meta);
 
+                    if (item.getType() == Material.COMPASS) {
+                        RunnerModVariables.hasFortressTracker = true;
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Fortress tracker has been enabled.");
+                    }
+
+
                     if (item.getType() == Material.GOLDEN_APPLE) {
-                        RunnerVariables.hasDoubleHealth = true;
+                        RunnerModVariables.hasDoubleHealth = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Double health has been enabled.");
                     }
 
                     if (item.getType() == Material.REDSTONE) {
-                        RunnerVariables.hasDamageBoost = true;
+                        RunnerModVariables.hasDamageBoost = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Damage boost has been enabled.");
                     }
 
                     if (item.getType() == Material.GOLDEN_PICKAXE) {
-                        RunnerVariables.hasQuickPick = true;
+                        RunnerModVariables.hasQuickPick = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Quick pick has been enabled.");
                     }
 
                     if (item.getType() == Material.SUGAR) {
-                        RunnerVariables.hasQuickFoot = true;
+                        RunnerModVariables.hasQuickFoot = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Quick foot has been enabled.");
                     }
 
                     if (item.getType() == Material.GOLDEN_CARROT) {
-                        RunnerVariables.hasSaturated = true;
+                        RunnerModVariables.hasSaturated = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Saturated has been enabled.");
                     }
 
                     if (item.getType() == Material.IRON_CHESTPLATE) {
-                        RunnerVariables.hasArmorer = true;
+                        RunnerModVariables.hasArmorer = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Armorer has been enabled.");
                     }
 

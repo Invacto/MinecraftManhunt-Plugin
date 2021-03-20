@@ -4,25 +4,27 @@ import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
 import me.invacto.huntervsrunner.inventories.RunnerModifiersMenu;
-import me.invacto.huntervsrunner.variables.GlobalVariables;
-import me.invacto.huntervsrunner.variables.HunterVariables;
-import me.invacto.huntervsrunner.variables.RunnerVariables;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import me.invacto.huntervsrunner.variables.GlobalModVariables;
+import me.invacto.huntervsrunner.variables.HunterModVariables;
+import me.invacto.huntervsrunner.variables.RunnerModVariables;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.List;
 
 public class Commands implements CommandExecutor {
 
@@ -31,6 +33,13 @@ public class Commands implements CommandExecutor {
     public List<Integer> ints = new ArrayList<>();
 
     public int startDuration = 60;
+
+    public static HashMap<UUID, HashMap<ItemStack, Integer>> outerCrafts = new HashMap<>();
+
+    public static HashMap<ItemStack, Integer> innerCrafts = new HashMap<>();
+
+    public boolean addedRecipes;
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -68,19 +77,94 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            // ENABLE THIS BACK RIGHT NOW IT IS SENT TO IT CAN START WITH ONLY 1 PERSON
-
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            //Checks if the server has 2 or more people, else it returns and tells the sender that there is only 1 person
-            if (player.getServer().getOnlinePlayers().size() > 2) {
+            if (player.getServer().getOnlinePlayers().size() < 2) {
                 player.sendMessage(ChatColor.RED + "There is needs to be at least 2 people on the server!");
                 return true;
+            }
+
+            if (GlobalModVariables.hasRecipes) {
+
+                if (!addedRecipes) {
+
+                    ShapedRecipe iron_pack = new ShapedRecipe(NamespacedKey.minecraft("iron_pack"), new ItemStack(Material.IRON_INGOT, 10));
+                    iron_pack.shape("III",
+                                    "ICI",
+                                    "III");
+
+                    iron_pack.setIngredient('I', Material.IRON_ORE);
+                    iron_pack.setIngredient('C', Material.COAL);
+
+                    Bukkit.getServer().addRecipe(iron_pack);
+
+                    ShapedRecipe gold_pack = new ShapedRecipe(NamespacedKey.minecraft("gold_pack"), new ItemStack(Material.GOLD_INGOT, 10));
+                    gold_pack.shape("GGG",
+                                    "GCG",
+                                    "GGG");
+
+                    gold_pack.setIngredient('G', Material.GOLD_ORE);
+                    gold_pack.setIngredient('C', Material.COAL);
+
+                    Bukkit.getServer().addRecipe(gold_pack);
+
+                    ItemStack quickPick = new ItemStack(Material.IRON_PICKAXE);
+                    ItemMeta quickPickMeta = quickPick.getItemMeta();
+                    assert quickPickMeta != null;
+                    quickPickMeta.setDisplayName("Quick Pick");
+                    quickPickMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+                    quickPick.setItemMeta(quickPickMeta);
+
+                    ShapedRecipe quick_pick = new ShapedRecipe(NamespacedKey.minecraft("quick_pick"), quickPick);
+                    quick_pick.shape("III",
+                                     "CSC",
+                                     " S ");
+
+                    quick_pick.setIngredient('I', Material.IRON_ORE);
+                    quick_pick.setIngredient('C', Material.COAL);
+                    quick_pick.setIngredient('S', Material.STICK);
+
+                    Bukkit.getServer().addRecipe(quick_pick);
+
+                    ItemStack philoPick = new ItemStack(new ItemStack(Material.DIAMOND_PICKAXE));
+                    ItemMeta philoPickMeta = philoPick.getItemMeta();
+                    assert philoPickMeta != null;
+                    philoPickMeta.setDisplayName("Philosopher's Pick");
+                    philoPickMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 2, true);
+
+                    ((Damageable) philoPickMeta).setDamage(1559);
+
+                    philoPick.setItemMeta(philoPickMeta);
+
+                    ShapedRecipe philo_pick = new ShapedRecipe(NamespacedKey.minecraft("philo_pick"), philoPick);
+                    philo_pick.shape("IGI",
+                                     "LSL",
+                                     " S ");
+
+                    philo_pick.setIngredient('I', Material.IRON_ORE);
+                    philo_pick.setIngredient('G', Material.GOLD_ORE);
+                    philo_pick.setIngredient('L', Material.LAPIS_BLOCK);
+                    philo_pick.setIngredient('S', Material.STICK);
+
+                    Bukkit.getServer().addRecipe(philo_pick);
+
+                    for (Player value : Bukkit.getServer().getOnlinePlayers()) {
+
+                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult(), 3);
+                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult(), 3);
+                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult(), 3);
+                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult(), 2);
+                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+                    }
+
+                    addedRecipes = true;
+                }
+
             }
 
             @SuppressWarnings("unchecked") Collection<Player> tempPlayers =  (Collection<Player>) player.getServer().getOnlinePlayers();
@@ -95,28 +179,28 @@ public class Commands implements CommandExecutor {
                     "Manhunt" + ChatColor.GOLD +
                     " has started! Best of luck.");
 
-            if (RunnerVariables.hasDoubleHealth) {
+            if (RunnerModVariables.hasDoubleHealth) {
                 Objects.requireNonNull(runnerPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(40);
                 runnerPlayer.setHealth(40);
             }
 
-            if (RunnerVariables.hasDamageBoost) {
+            if (RunnerModVariables.hasDamageBoost) {
                 runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0));
             }
 
-            if (RunnerVariables.hasQuickPick) {
+            if (RunnerModVariables.hasQuickPick) {
                 runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 0));
             }
 
-            if (RunnerVariables.hasQuickFoot) {
+            if (RunnerModVariables.hasQuickFoot) {
                 runnerPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
             }
 
-            if (RunnerVariables.hasSaturated) {
+            if (RunnerModVariables.hasSaturated) {
                 runnerPlayer.getInventory().addItem(new ItemStack(Material.BREAD, 8));
             }
 
-            if (RunnerVariables.hasArmorer) {
+            if (RunnerModVariables.hasArmorer) {
                 runnerPlayer.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
             }
 
@@ -134,7 +218,7 @@ public class Commands implements CommandExecutor {
                 value.setExhaustion(20);
                 value.setSaturation(20);
 
-                if (GlobalVariables.stoneTools) {
+                if (GlobalModVariables.stoneTools) {
                     ArrayList<ItemStack> tools = new ArrayList<>();
                     tools.add(new ItemStack(Material.STONE_SWORD));
                     tools.add(new ItemStack(Material.STONE_PICKAXE));
@@ -147,7 +231,7 @@ public class Commands implements CommandExecutor {
 
                 }
 
-                if (GlobalVariables.leatherArmor) {
+                if (GlobalModVariables.leatherArmor) {
                     ArrayList<ItemStack> armor = new ArrayList<>();
                     armor.add(new ItemStack(Material.LEATHER_HELMET));
                     armor.add(new ItemStack(Material.LEATHER_CHESTPLATE));
@@ -176,11 +260,11 @@ public class Commands implements CommandExecutor {
                 potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, (startDuration * 20), 200));
                 potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, (startDuration * 20), 255));
 
-                if (HunterVariables.hasGlowing) {
+                if (HunterModVariables.hasGlowing) {
                     value.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
                 }
 
-                if (HunterVariables.hasSlowness) {
+                if (HunterModVariables.hasSlowness) {
                     value.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 0));
                     value.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, 16));
                 }
@@ -319,7 +403,7 @@ public class Commands implements CommandExecutor {
                 player.openInventory(hunterGui.getInventory());
             } else
                 player.openInventory(hunterGui.getInventory());
-            
+
             ModifiersMenu modsGui = new ModifiersMenu();
 
             player.openInventory(modsGui.getInventory());

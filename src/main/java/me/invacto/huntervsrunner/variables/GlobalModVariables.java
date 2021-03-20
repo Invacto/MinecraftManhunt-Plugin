@@ -1,8 +1,8 @@
 package me.invacto.huntervsrunner.variables;
 
-@SuppressWarnings("unused")
-public class GlobalVariables {
+public class GlobalModVariables {
 
+    public static  boolean hasRecipes;
     public static boolean stoneTools;
     public static boolean leatherArmor;
 

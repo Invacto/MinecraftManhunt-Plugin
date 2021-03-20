@@ -1,6 +1,7 @@
 package me.invacto.huntervsrunner.inventories;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -35,7 +36,7 @@ public class ModifiersMenu implements InventoryHolder {
         ItemStack hunterSide = createItem(Material.IRON_SWORD, "Hunter modifiers", Collections.singletonList("Opens the Hunter modifiers menu"));
         inv.setItem(15, hunterSide);
 
-        ItemStack goBack = createItem(Material.BARRIER, "Go back", null);
+        ItemStack goBack = createItem(Material.BARRIER, ChatColor.GOLD + "Close", null);
         inv.setItem(22, goBack);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////

@@ -29,6 +29,8 @@ public class RunnerModifiersMenu implements InventoryHolder {
             inv.setItem(i, fill);
         }
 
+        ItemStack fortressTracker = createItem(Material.COMPASS, ChatColor.GOLD + "Fortress Tracker", Collections.singletonList("Nether fortress tracker on the compass."));
+
         ItemStack doubleHealth = createItem(Material.GOLDEN_APPLE, ChatColor.BOLD + "Double Health", Collections.singletonList("Enables double health for the Runner"));
         ItemStack bloodLust = createItem(Material.REDSTONE, ChatColor.BOLD + "Bloodlust", Collections.singletonList("Enables damage boost for the Runner"));
         ItemStack quickPick = createItem(Material.GOLDEN_PICKAXE, ChatColor.BOLD + "Quickpick", Collections.singletonList("Enables haste for the Runner"));
@@ -36,6 +38,7 @@ public class RunnerModifiersMenu implements InventoryHolder {
         ItemStack startFood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
         ItemStack startArmor = createItem(Material.IRON_CHESTPLATE, ChatColor.BOLD + "Armored", Collections.singletonList("Gives the Runner starting armor"));
 
+        inv.setItem(1, fortressTracker);
         inv.setItem(10, doubleHealth);
         inv.setItem(11, bloodLust);
         inv.setItem(12, quickPick);

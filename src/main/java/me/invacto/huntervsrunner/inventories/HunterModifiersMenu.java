@@ -32,7 +32,7 @@ public class HunterModifiersMenu implements InventoryHolder {
         ItemStack glowing = createItem(Material.GLOWSTONE_DUST, "Glowing", Collections.singletonList("Gives all of the Hunters a perma glowing effect."));
         inv.setItem(12, glowing);
 
-        ItemStack slowness = createItem(Material.ENDER_PEARL, "Ender travel", Collections.singletonList("Gives all hunters 16 ender pearls \nbut gives a slowness effect."));
+        ItemStack slowness = createItem(Material.ENDER_PEARL, "Ender travel", Collections.singletonList("Gives all hunters 16 ender pearls with a slowness effect."));
         inv.setItem(14, slowness);
 
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);

@@ -2,7 +2,7 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
-import me.invacto.huntervsrunner.variables.HunterVariables;
+import me.invacto.huntervsrunner.variables.HunterModVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -50,13 +50,13 @@ public class HunterMenuInteract implements Listener {
                     ////////////////////////////////////////////////////////////////////////////////
 
                     if (item.getType() == Material.GLOWSTONE_DUST) {
-                        HunterVariables.hasGlowing = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been disabled");
+                        HunterModVariables.hasGlowing = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Glowing has been disabled");
                     }
 
                     if (item.getType() == Material.ENDER_PEARL) {
-                        HunterVariables.hasGlowing = false;
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Ender travel has been disabled");
+                        HunterModVariables.hasGlowing = false;
+                        Bukkit.broadcastMessage(ChatColor.RED + "Ender travel has been disabled");
                     }
 
                     ////////////////////////////////////////////////////////////////////////////////
@@ -71,12 +71,12 @@ public class HunterMenuInteract implements Listener {
                     ////////////////////////////////////////////////////////////////////////////////
 
                     if (item.getType() == Material.GLOWSTONE_DUST) {
-                        HunterVariables.hasGlowing = true;
+                        HunterModVariables.hasGlowing = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Glowing has been enabled");
                     }
 
                     if (item.getType() == Material.ENDER_PEARL) {
-                        HunterVariables.hasGlowing = true;
+                        HunterModVariables.hasGlowing = true;
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Ender travel has been enabled");
                     }
 

@@ -1,7 +1,7 @@
 package me.invacto.huntervsrunner.events;
 
 import me.invacto.huntervsrunner.commands.Commands;
-import me.invacto.huntervsrunner.variables.HunterVariables;
+import me.invacto.huntervsrunner.variables.HunterModVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +20,7 @@ public class RespawnHunter implements Listener {
 
         if (player != Bukkit.getServer().getPlayer(Commands.runnerName)) {
 
-            if (HunterVariables.hasGlowing) {
+            if (HunterModVariables.hasGlowing) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
             }
 
