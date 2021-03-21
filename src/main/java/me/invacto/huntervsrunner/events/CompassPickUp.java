@@ -16,6 +16,9 @@ public class CompassPickUp implements Listener {
     public void onItemPickUp(EntityPickupItemEvent event) {
 
         ItemStack item = event.getItem().getItemStack();
+
+        if (event.getEntity().getType() != EntityType.PLAYER) { return; }
+
         Player player = (Player) event.getEntity();
 
         if (event.getEntity().getType() == EntityType.PLAYER) {
