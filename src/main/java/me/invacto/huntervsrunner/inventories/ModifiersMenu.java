@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -28,12 +29,20 @@ public class ModifiersMenu implements InventoryHolder {
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
         ItemStack runnerSide = createItem(Material.IRON_BOOTS, "Runner modifiers", Collections.singletonList("Opens the Runner modifiers menu"));
+        ItemMeta runnerSideMeta = runnerSide.getItemMeta();
+        assert runnerSideMeta != null;
+        runnerSideMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        runnerSide.setItemMeta(runnerSideMeta);
         inv.setItem(11, runnerSide);
 
         ItemStack globalSide = createItem(Material.PLAYER_HEAD, "Global modifiers", Collections.singletonList("Opens the Global modifiers menu"));
         inv.setItem(13, globalSide);
 
         ItemStack hunterSide = createItem(Material.IRON_SWORD, "Hunter modifiers", Collections.singletonList("Opens the Hunter modifiers menu"));
+        ItemMeta hunterSideMeta = hunterSide.getItemMeta();
+        assert hunterSideMeta != null;
+        hunterSideMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        hunterSide.setItemMeta(hunterSideMeta);
         inv.setItem(15, hunterSide);
 
         ItemStack goBack = createItem(Material.BARRIER, ChatColor.GOLD + "Close", null);

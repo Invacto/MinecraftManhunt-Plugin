@@ -13,6 +13,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
+import static me.invacto.huntervsrunner.commands.StartAndReset.innerCrafts;
+import static me.invacto.huntervsrunner.commands.StartAndReset.outerCrafts;
+
 public class PlayerCrafting implements Listener {
 
     @EventHandler
@@ -68,10 +71,10 @@ public class PlayerCrafting implements Listener {
             return;
         }
 
-        if (Commands.outerCrafts.get(player.getUniqueId()).get(result) > 0 && Commands.outerCrafts.get(player.getUniqueId()).get(result) <= 3) {
-            Commands.innerCrafts.put(result, Commands.outerCrafts.get(player.getUniqueId()).get(result) - 1);
-            Commands.outerCrafts.replace(player.getUniqueId(), Commands.innerCrafts);
-            player.sendMessage(ChatColor.GOLD + ("You have " + Commands.innerCrafts.get(result) + " crafts remaining for " + result.getType().toString()));
+        if (outerCrafts.get(player.getUniqueId()).get(result) > 0 && outerCrafts.get(player.getUniqueId()).get(result) <= 3) {
+            innerCrafts.put(result, outerCrafts.get(player.getUniqueId()).get(result) - 1);
+            outerCrafts.replace(player.getUniqueId(), innerCrafts);
+            player.sendMessage(ChatColor.GOLD + ("You have " + innerCrafts.get(result) + " crafts remaining for " + result.getType().toString()));
         } else {
             event.setCancelled(true);
             player.closeInventory();

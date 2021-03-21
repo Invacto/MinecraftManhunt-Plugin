@@ -1,6 +1,7 @@
 package me.invacto.huntervsrunner;
 
 import me.invacto.huntervsrunner.commands.Commands;
+import me.invacto.huntervsrunner.commands.StartAndReset;
 import me.invacto.huntervsrunner.events.*;
 import me.invacto.huntervsrunner.events.menuinteract.GlobalMenuInteract;
 import me.invacto.huntervsrunner.events.menuinteract.HunterMenuInteract;
@@ -17,7 +18,8 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
 
         Commands commands = new Commands();
-        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        StartAndReset startAndReset = new StartAndReset();
+        getServer().getPluginManager().registerEvents(new PlayerCompassInteract(), this);
         getServer().getPluginManager().registerEvents(new RunnerDeath(), this);
         getServer().getPluginManager().registerEvents(new ServerReload(), this);
         getServer().getPluginManager().registerEvents(new CompassPickUp(), this);
@@ -30,12 +32,13 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RespawnHunter(), this);
         getServer().getPluginManager().registerEvents(new PlayerCrafting(), this);
         Objects.requireNonNull(getCommand("runner")).setExecutor(commands);
-        Objects.requireNonNull(getCommand("start")).setExecutor(commands);
         Objects.requireNonNull(getCommand("compass")).setExecutor(commands);
-        Objects.requireNonNull(getCommand("reset")).setExecutor(commands);
         Objects.requireNonNull(getCommand("mm")).setExecutor(commands);
         Objects.requireNonNull(getCommand("settimer")).setExecutor(commands);
         Objects.requireNonNull(getCommand("mods")).setExecutor(commands);
+        Objects.requireNonNull(getCommand("start")).setExecutor(startAndReset);
+        Objects.requireNonNull(getCommand("reset")).setExecutor(startAndReset);
+
 
         System.out.println("HunterVsRunner is now enabled.");
     }

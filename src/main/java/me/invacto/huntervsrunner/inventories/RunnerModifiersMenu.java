@@ -3,8 +3,10 @@ package me.invacto.huntervsrunner.inventories;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -33,10 +35,21 @@ public class RunnerModifiersMenu implements InventoryHolder {
 
         ItemStack doubleHealth = createItem(Material.GOLDEN_APPLE, ChatColor.BOLD + "Double Health", Collections.singletonList("Enables double health for the Runner"));
         ItemStack bloodLust = createItem(Material.REDSTONE, ChatColor.BOLD + "Bloodlust", Collections.singletonList("Enables damage boost for the Runner"));
+
         ItemStack quickPick = createItem(Material.GOLDEN_PICKAXE, ChatColor.BOLD + "Quickpick", Collections.singletonList("Enables haste for the Runner"));
+        ItemMeta quickPickMeta = quickPick.getItemMeta();
+        assert quickPickMeta != null;
+        quickPickMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        quickPick.setItemMeta(quickPickMeta);
+
         ItemStack quickFoot = createItem(Material.SUGAR, ChatColor.BOLD + "Quickfoot", Collections.singletonList("Enables speed for the Runner"));
         ItemStack startFood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
+
         ItemStack startArmor = createItem(Material.IRON_CHESTPLATE, ChatColor.BOLD + "Armored", Collections.singletonList("Gives the Runner starting armor"));
+        ItemMeta startArmorMeta = startArmor.getItemMeta();
+        assert startArmorMeta != null;
+        startArmorMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        startArmor.setItemMeta(startArmorMeta);
 
         inv.setItem(4, fortressTracker);
         inv.setItem(19, doubleHealth);

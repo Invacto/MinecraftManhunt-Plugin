@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import static me.invacto.huntervsrunner.commands.Commands.runnerName;
 
-public class PlayerInteract implements Listener {
+public class PlayerCompassInteract implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -27,7 +27,10 @@ public class PlayerInteract implements Listener {
 
         String runnerName = Commands.runnerName;
 
-        assert item != null;
+        if (item == null) return;
+
+        if (item.getType() != Material.COMPASS) return;
+
         if (Objects.requireNonNull(item.getItemMeta()).getDisplayName().equals("Fortress Tracker")) {
 
             fortressTracker(player, event, action, item);
