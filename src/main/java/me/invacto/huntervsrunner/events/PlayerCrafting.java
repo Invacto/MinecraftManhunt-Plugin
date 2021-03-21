@@ -47,6 +47,17 @@ public class PlayerCrafting implements Listener {
 
         }
 
+        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult().getType().toString())) {
+
+            if (player != Bukkit.getServer().getPlayer(Commands.runnerName)) {
+                player.sendMessage("You cannot craft this item!");
+                return;
+            }
+
+            onCrafting(event, player, result);
+
+        }
+
     }
 
 

@@ -11,6 +11,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 
+import java.util.Objects;
+
+import static me.invacto.huntervsrunner.commands.Commands.runnerName;
+
 public class PlayerInteract implements Listener {
 
     @EventHandler
@@ -23,8 +27,21 @@ public class PlayerInteract implements Listener {
 
         String runnerName = Commands.runnerName;
 
+        assert item != null;
+        if (Objects.requireNonNull(item.getItemMeta()).getDisplayName().equals("Fortress Tracker")) {
+
+            fortressTracker(player, event, action, item);
+
+            return;
+
+        }
+
+        if (RunnerModVariables.hasFortressTracker) {
+            fortressTracker(player, event, action, item);
+        }
+
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
-            if (item != null && item.getType() == Material.COMPASS) {
+            if (item.getType() == Material.COMPASS) {
 
                 if (runnerName != null) {
                     Player runner = player.getServer().getPlayer(runnerName);
@@ -66,12 +83,14 @@ public class PlayerInteract implements Listener {
 
         }
 
+    }
+
+    public void fortressTracker(Player player, PlayerInteractEvent event, Action action, ItemStack item) {
+
         if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
-            if (item != null && item.getType() == Material.COMPASS) {
+            if (item.getType() == Material.COMPASS) {
 
                 if (event.getPlayer() != Bukkit.getServer().getPlayer(runnerName)) { return; }
-
-                if (!RunnerModVariables.hasFortressTracker) return;
 
                 Location loc = player.getWorld().locateNearestStructure(player.getLocation(), StructureType.NETHER_FORTRESS, 625, false);
 
@@ -93,10 +112,6 @@ public class PlayerInteract implements Listener {
             }
 
         }
-
-
-
-
     }
 }
 

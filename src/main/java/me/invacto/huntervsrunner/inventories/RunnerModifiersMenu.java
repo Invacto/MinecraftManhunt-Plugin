@@ -18,7 +18,7 @@ public class RunnerModifiersMenu implements InventoryHolder {
     public static Map<String, ItemStack[]> runnerMenu = new HashMap<>();
 
     public RunnerModifiersMenu() {
-        inv = Bukkit.createInventory(this, 27, "Runner Modifiers Menu");
+        inv = Bukkit.createInventory(this, 45, "Runner Modifiers Menu");
         init();
     }
 
@@ -38,16 +38,16 @@ public class RunnerModifiersMenu implements InventoryHolder {
         ItemStack startFood = createItem(Material.GOLDEN_CARROT, ChatColor.BOLD + "Saturated", Collections.singletonList("Gives the Runner starting food"));
         ItemStack startArmor = createItem(Material.IRON_CHESTPLATE, ChatColor.BOLD + "Armored", Collections.singletonList("Gives the Runner starting armor"));
 
-        inv.setItem(1, fortressTracker);
-        inv.setItem(10, doubleHealth);
-        inv.setItem(11, bloodLust);
-        inv.setItem(12, quickPick);
-        inv.setItem(14, quickFoot);
-        inv.setItem(15, startFood);
-        inv.setItem(16, startArmor);
+        inv.setItem(4, fortressTracker);
+        inv.setItem(19, doubleHealth);
+        inv.setItem(20, bloodLust);
+        inv.setItem(21, quickPick);
+        inv.setItem(23, quickFoot);
+        inv.setItem(24, startFood);
+        inv.setItem(25, startArmor);
 
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);
-        inv.setItem(22, goBack);
+        inv.setItem(40, goBack);
 
     }
 

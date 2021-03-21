@@ -77,10 +77,15 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
+            /*
+
             if (player.getServer().getOnlinePlayers().size() < 2) {
                 player.sendMessage(ChatColor.RED + "There is needs to be at least 2 people on the server!");
                 return true;
             }
+
+
+             */
 
             if (GlobalModVariables.hasRecipes) {
 
@@ -124,7 +129,7 @@ public class Commands implements CommandExecutor {
 
                     Bukkit.getServer().addRecipe(quick_pick);
 
-                    ItemStack philoPick = new ItemStack(new ItemStack(Material.DIAMOND_PICKAXE));
+                    ItemStack philoPick = new ItemStack((Material.DIAMOND_PICKAXE));
                     ItemMeta philoPickMeta = philoPick.getItemMeta();
                     assert philoPickMeta != null;
                     philoPickMeta.setDisplayName("Philosopher's Pick");
@@ -146,21 +151,23 @@ public class Commands implements CommandExecutor {
 
                     Bukkit.getServer().addRecipe(philo_pick);
 
-                    for (Player value : Bukkit.getServer().getOnlinePlayers()) {
+                    ItemStack fortressCompass = new ItemStack(Material.COMPASS);
+                    ItemMeta compassMeta = fortressCompass.getItemMeta();
+                    assert compassMeta != null;
+                    compassMeta.setDisplayName("Fortress Tracker");
+                    fortressCompass.setItemMeta(compassMeta);
 
-                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult(), 3);
-                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+                    ShapedRecipe fortress_compass = new ShapedRecipe(NamespacedKey.minecraft("fortress_compass"), fortressCompass);
+                    fortress_compass.shape(" B ",
+                                           "BCB",
+                                           " B ");
 
-                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult(), 3);
-                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+                    fortress_compass.setIngredient('B', Material.NETHER_BRICK);
+                    fortress_compass.setIngredient('C', Material.COMPASS);
 
-                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult(), 3);
-                        outerCrafts.put(value.getUniqueId(), innerCrafts);
+                    Bukkit.getServer().addRecipe(fortress_compass);
 
-                        innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult(), 2);
-                        outerCrafts.put(value.getUniqueId(), innerCrafts);
-
-                    }
+                    initCrafts();
 
                     addedRecipes = true;
                 }
@@ -208,12 +215,8 @@ public class Commands implements CommandExecutor {
             //All players looped and get full healed
             for (Player value : players) {
 
-                if (Objects.requireNonNull(value.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue() == 40) {
-                    value.setHealth(40);
-                } else {
-                    value.setHealth(20);
-                }
 
+                value.setHealth(Objects.requireNonNull(value.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
                 value.setFoodLevel(20);
                 value.setExhaustion(20);
                 value.setSaturation(20);
@@ -342,6 +345,8 @@ public class Commands implements CommandExecutor {
 
             startDuration = 60;
 
+            initCrafts();
+
             assert plugin != null;
             Bukkit.getScheduler().cancelTasks(plugin);
             ints.clear();
@@ -411,6 +416,27 @@ public class Commands implements CommandExecutor {
         }
 
         return true;
+    }
+
+    public void initCrafts() {
+        for (Player value : Bukkit.getServer().getOnlinePlayers()) {
+
+            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult(), 3);
+            outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult(), 3);
+            outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult(), 3);
+            outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult(), 2);
+            outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult(), 2);
+            outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+        }
     }
 
 }

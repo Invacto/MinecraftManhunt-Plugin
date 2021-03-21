@@ -14,7 +14,7 @@ public class ModifiersMenu implements InventoryHolder {
     private final Inventory inv;
 
     public ModifiersMenu() {
-        inv = Bukkit.createInventory(this, 27, "Modifiers Menu");
+        inv = Bukkit.createInventory(this, 36, "Modifiers Menu");
         init();
     }
 
@@ -37,7 +37,7 @@ public class ModifiersMenu implements InventoryHolder {
         inv.setItem(15, hunterSide);
 
         ItemStack goBack = createItem(Material.BARRIER, ChatColor.GOLD + "Close", null);
-        inv.setItem(22, goBack);
+        inv.setItem(31, goBack);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 

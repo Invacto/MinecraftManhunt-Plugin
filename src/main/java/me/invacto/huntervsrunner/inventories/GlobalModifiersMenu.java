@@ -17,7 +17,7 @@ public class GlobalModifiersMenu implements InventoryHolder {
     public static Map<String, ItemStack[]> globalMenu = new HashMap<>();
 
     public GlobalModifiersMenu() {
-        inv = Bukkit.createInventory(this, 27, "Global Modifiers Menu");
+        inv = Bukkit.createInventory(this, 45, "Global Modifiers Menu");
         init();
     }
 
@@ -34,13 +34,13 @@ public class GlobalModifiersMenu implements InventoryHolder {
         inv.setItem(4, recipes);
 
         ItemStack stoneTools = createItem(Material.STONE_PICKAXE, "Stone Tools", Collections.singletonList("All players start with stone tools"));
-        inv.setItem(12, stoneTools);
+        inv.setItem(21, stoneTools);
 
         ItemStack leatherArmor = createItem(Material.LEATHER_CHESTPLATE, "Armorer", Collections.singletonList("All players start with leather armor"));
-        inv.setItem(14, leatherArmor);
+        inv.setItem(23, leatherArmor);
 
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);
-        inv.setItem(22, goBack);
+        inv.setItem(40, goBack);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 

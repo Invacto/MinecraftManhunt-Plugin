@@ -16,7 +16,7 @@ public class HunterModifiersMenu implements InventoryHolder {
     public static Map<String, ItemStack[]> hunterMenu = new HashMap<>();
 
     public HunterModifiersMenu() {
-        inv = Bukkit.createInventory(this, 27, "Hunter Modifiers Menu");
+        inv = Bukkit.createInventory(this, 36, "Hunter Modifiers Menu");
         init();
     }
 
@@ -36,7 +36,7 @@ public class HunterModifiersMenu implements InventoryHolder {
         inv.setItem(14, slowness);
 
         ItemStack goBack = createItem(Material.ARROW, "Go back", null);
-        inv.setItem(22, goBack);
+        inv.setItem(31, goBack);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
