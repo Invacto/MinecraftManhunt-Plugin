@@ -2,6 +2,7 @@ package me.invacto.huntervsrunner.events;
 
 import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.HunterModifiersMenu;
+import me.invacto.huntervsrunner.inventories.RecipesMenu;
 import me.invacto.huntervsrunner.inventories.RunnerModifiersMenu;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +24,11 @@ public class InventoryClose implements Listener {
 
         if (event.getView().getTitle().contains("Global Modifiers Menu")) {
             GlobalModifiersMenu.globalMenu.put(GlobalModifiersMenu.uuid.toString(), event.getInventory().getContents());
+
+        }
+
+        if (event.getView().getTitle().contains("Recipes Menu")) {
+            RecipesMenu.recipesMenu.put(RecipesMenu.uuid.toString(), event.getInventory().getContents());
 
         }
 

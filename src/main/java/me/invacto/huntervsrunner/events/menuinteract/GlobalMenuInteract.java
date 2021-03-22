@@ -2,6 +2,7 @@ package me.invacto.huntervsrunner.events.menuinteract;
 
 import me.invacto.huntervsrunner.inventories.GlobalModifiersMenu;
 import me.invacto.huntervsrunner.inventories.ModifiersMenu;
+import me.invacto.huntervsrunner.inventories.RecipesMenu;
 import me.invacto.huntervsrunner.variables.GlobalModVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,6 +41,12 @@ public class GlobalMenuInteract implements Listener {
 
                 if (item.getType() == Material.ARROW) {
                     ModifiersMenu gui = new ModifiersMenu();
+                    player.openInventory(gui.getInventory());
+                    return;
+                }
+
+                if (item.getType() == Material.BOOK) {
+                    RecipesMenu gui = new RecipesMenu();
                     player.openInventory(gui.getInventory());
                     return;
                 }

@@ -3,10 +3,7 @@ package me.invacto.huntervsrunner;
 import me.invacto.huntervsrunner.commands.Commands;
 import me.invacto.huntervsrunner.commands.StartAndReset;
 import me.invacto.huntervsrunner.events.*;
-import me.invacto.huntervsrunner.events.menuinteract.GlobalMenuInteract;
-import me.invacto.huntervsrunner.events.menuinteract.HunterMenuInteract;
-import me.invacto.huntervsrunner.events.menuinteract.ModifiersMenuInteract;
-import me.invacto.huntervsrunner.events.menuinteract.RunnerMenuInteract;
+import me.invacto.huntervsrunner.events.menuinteract.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -27,6 +24,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RunnerMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new HunterMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new GlobalMenuInteract(), this);
+        getServer().getPluginManager().registerEvents(new RecipeMenuInteract(), this);
+        getServer().getPluginManager().registerEvents(new ItemRecipeMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new ModifiersMenuInteract(), this);
         getServer().getPluginManager().registerEvents(new InventoryClose(), this);
         getServer().getPluginManager().registerEvents(new RespawnHunter(), this);

@@ -34,6 +34,9 @@ public class GlobalModifiersMenu implements InventoryHolder {
         ItemStack recipes = createItem(Material.ENCHANTED_BOOK, "Custom Recipes", Collections.singletonList("Enables custom recipes"));
         inv.setItem(4, recipes);
 
+        ItemStack recipeBook = createItem(Material.BOOK, "Recipe Book", Collections.singletonList("Shows all of the custom recipes"));
+        inv.setItem(5, recipeBook);
+
         ItemStack stoneTools = createItem(Material.STONE_PICKAXE, "Stone Tools", Collections.singletonList("All players start with stone tools"));
         ItemMeta stoneToolsMeta = stoneTools.getItemMeta();
         assert stoneToolsMeta != null;

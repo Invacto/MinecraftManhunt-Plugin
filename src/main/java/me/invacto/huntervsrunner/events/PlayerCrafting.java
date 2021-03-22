@@ -1,6 +1,7 @@
 package me.invacto.huntervsrunner.events;
 
 import me.invacto.huntervsrunner.commands.Commands;
+import me.invacto.huntervsrunner.variables.RecipesVariables;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -24,41 +25,49 @@ public class PlayerCrafting implements Listener {
         Player player = (Player) event.getView().getPlayer();
         ItemStack result = event.getRecipe().getResult();
 
+        if (RecipesVariables.hasIronPack) {
+            if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult().getType().toString())) {
 
+                onCrafting(event, player, result);
 
-        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult().getType().toString())) {
-
-            onCrafting(event, player, result);
-
-        }
-
-        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult().getType().toString())) {
-
-            onCrafting(event, player, result);
-
-        }
-
-        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult().getType().toString())) {
-
-            onCrafting(event, player, result);
-
-        }
-
-        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult().getType().toString())) {
-
-            onCrafting(event, player, result);
-
-        }
-
-        if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult().getType().toString())) {
-
-            if (player != Bukkit.getServer().getPlayer(Commands.runnerName)) {
-                player.sendMessage("You cannot craft this item!");
-                return;
             }
+        }
 
-            onCrafting(event, player, result);
+        if (RecipesVariables.hasGoldPack) {
+            if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult().getType().toString())) {
 
+                onCrafting(event, player, result);
+
+            }
+        }
+
+        if (RecipesVariables.hasQuickPick) {
+            if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult().getType().toString())) {
+
+                onCrafting(event, player, result);
+
+            }
+        }
+
+        if (RecipesVariables.hasPhiloPick) {
+            if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult().getType().toString())) {
+
+                onCrafting(event, player, result);
+
+            }
+        }
+
+        if (RecipesVariables.hasFortressTracker) {
+            if (result.getType().toString().equals(Objects.requireNonNull(Bukkit.getServer().getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult().getType().toString())) {
+
+                if (player != Bukkit.getServer().getPlayer(Commands.runnerName)) {
+                    player.sendMessage("You cannot craft this item!");
+                    return;
+                }
+
+                onCrafting(event, player, result);
+
+            }
         }
 
     }

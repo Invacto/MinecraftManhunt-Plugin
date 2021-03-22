@@ -2,6 +2,7 @@ package me.invacto.huntervsrunner.commands;
 
 import me.invacto.huntervsrunner.variables.GlobalModVariables;
 import me.invacto.huntervsrunner.variables.HunterModVariables;
+import me.invacto.huntervsrunner.variables.RecipesVariables;
 import me.invacto.huntervsrunner.variables.RunnerModVariables;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -67,9 +68,31 @@ public class StartAndReset implements CommandExecutor {
 
                     addRecipes();
 
+                    if (!RecipesVariables.hasIronPack) {
+                        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_pack"));
+                    }
+
+                    if (!RecipesVariables.hasGoldPack) {
+                        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_pack"));
+                    }
+
+                    if (!RecipesVariables.hasQuickPick) {
+                        Bukkit.removeRecipe(NamespacedKey.minecraft("quick_pick"));
+                    }
+
+                    if (!RecipesVariables.hasPhiloPick) {
+                        Bukkit.removeRecipe(NamespacedKey.minecraft("philo_pick"));
+                    }
+
+                    if (!RecipesVariables.hasFortressTracker) {
+                        Bukkit.removeRecipe(NamespacedKey.minecraft("fortress_compass"));
+                    }
+
+
                     initCrafts();
 
                     addedRecipes = true;
+
                 }
 
             }
@@ -139,8 +162,28 @@ public class StartAndReset implements CommandExecutor {
 
             startDuration = 60;
 
-            if (GlobalModVariables.hasRecipes) {
-                initCrafts();
+            if (addedRecipes) {
+                if (RecipesVariables.hasIronPack) {
+                    Bukkit.removeRecipe(NamespacedKey.minecraft("iron_pack"));
+                }
+
+                if (RecipesVariables.hasGoldPack) {
+                    Bukkit.removeRecipe(NamespacedKey.minecraft("gold_pack"));
+                }
+
+                if (RecipesVariables.hasQuickPick) {
+                    Bukkit.removeRecipe(NamespacedKey.minecraft("quick_pick"));
+                }
+
+                if (RecipesVariables.hasPhiloPick) {
+                    Bukkit.removeRecipe(NamespacedKey.minecraft("philo_pick"));
+                }
+
+                if (RecipesVariables.hasFortressTracker) {
+                    Bukkit.removeRecipe(NamespacedKey.minecraft("fortress_compass"));
+                }
+
+                addedRecipes = false;
             }
 
             assert plugin != null;
@@ -154,101 +197,123 @@ public class StartAndReset implements CommandExecutor {
     }
 
     public void addRecipes() {
-        ShapedRecipe iron_pack = new ShapedRecipe(NamespacedKey.minecraft("iron_pack"), new ItemStack(Material.IRON_INGOT, 10));
-        iron_pack.shape("III",
-                "ICI",
-                "III");
 
-        iron_pack.setIngredient('I', Material.IRON_ORE);
-        iron_pack.setIngredient('C', Material.COAL);
+        if (RecipesVariables.hasIronPack) {
+            ShapedRecipe iron_pack = new ShapedRecipe(NamespacedKey.minecraft("iron_pack"), new ItemStack(Material.IRON_INGOT, 10));
+            iron_pack.shape("III",
+                    "ICI",
+                    "III");
 
-        Bukkit.getServer().addRecipe(iron_pack);
+            iron_pack.setIngredient('I', Material.IRON_ORE);
+            iron_pack.setIngredient('C', Material.COAL);
 
-        ShapedRecipe gold_pack = new ShapedRecipe(NamespacedKey.minecraft("gold_pack"), new ItemStack(Material.GOLD_INGOT, 10));
-        gold_pack.shape("GGG",
-                "GCG",
-                "GGG");
+            Bukkit.getServer().addRecipe(iron_pack);
+        }
 
-        gold_pack.setIngredient('G', Material.GOLD_ORE);
-        gold_pack.setIngredient('C', Material.COAL);
+        if (RecipesVariables.hasGoldPack) {
+            ShapedRecipe gold_pack = new ShapedRecipe(NamespacedKey.minecraft("gold_pack"), new ItemStack(Material.GOLD_INGOT, 10));
+            gold_pack.shape("GGG",
+                    "GCG",
+                    "GGG");
 
-        Bukkit.getServer().addRecipe(gold_pack);
+            gold_pack.setIngredient('G', Material.GOLD_ORE);
+            gold_pack.setIngredient('C', Material.COAL);
 
-        ItemStack quickPick = new ItemStack(Material.IRON_PICKAXE);
-        ItemMeta quickPickMeta = quickPick.getItemMeta();
-        assert quickPickMeta != null;
-        quickPickMeta.setDisplayName("Quick Pick");
-        quickPickMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-        quickPick.setItemMeta(quickPickMeta);
+            Bukkit.getServer().addRecipe(gold_pack);
+        }
 
-        ShapedRecipe quick_pick = new ShapedRecipe(NamespacedKey.minecraft("quick_pick"), quickPick);
-        quick_pick.shape("III",
-                "CSC",
-                " S ");
+        if (RecipesVariables.hasQuickPick) {
+            ItemStack quickPick = new ItemStack(Material.IRON_PICKAXE);
+            ItemMeta quickPickMeta = quickPick.getItemMeta();
+            assert quickPickMeta != null;
+            quickPickMeta.setDisplayName("Quick Pick");
+            quickPickMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+            quickPick.setItemMeta(quickPickMeta);
 
-        quick_pick.setIngredient('I', Material.IRON_ORE);
-        quick_pick.setIngredient('C', Material.COAL);
-        quick_pick.setIngredient('S', Material.STICK);
+            ShapedRecipe quick_pick = new ShapedRecipe(NamespacedKey.minecraft("quick_pick"), quickPick);
+            quick_pick.shape("III",
+                    "CSC",
+                    " S ");
 
-        Bukkit.getServer().addRecipe(quick_pick);
+            quick_pick.setIngredient('I', Material.IRON_ORE);
+            quick_pick.setIngredient('C', Material.COAL);
+            quick_pick.setIngredient('S', Material.STICK);
 
-        ItemStack philoPick = new ItemStack((Material.DIAMOND_PICKAXE));
-        ItemMeta philoPickMeta = philoPick.getItemMeta();
-        assert philoPickMeta != null;
-        philoPickMeta.setDisplayName("Philosopher's Pick");
-        philoPickMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 2, true);
+            Bukkit.getServer().addRecipe(quick_pick);
+        }
 
-        ((Damageable) philoPickMeta).setDamage(1559);
+        if (RecipesVariables.hasPhiloPick) {
+            ItemStack philoPick = new ItemStack((Material.DIAMOND_PICKAXE));
+            ItemMeta philoPickMeta = philoPick.getItemMeta();
+            assert philoPickMeta != null;
+            philoPickMeta.setDisplayName("Philosopher's Pick");
+            philoPickMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 2, true);
 
-        philoPick.setItemMeta(philoPickMeta);
+            ((Damageable) philoPickMeta).setDamage(1559);
 
-        ShapedRecipe philo_pick = new ShapedRecipe(NamespacedKey.minecraft("philo_pick"), philoPick);
-        philo_pick.shape("IGI",
-                "LSL",
-                " S ");
+            philoPick.setItemMeta(philoPickMeta);
 
-        philo_pick.setIngredient('I', Material.IRON_ORE);
-        philo_pick.setIngredient('G', Material.GOLD_ORE);
-        philo_pick.setIngredient('L', Material.LAPIS_BLOCK);
-        philo_pick.setIngredient('S', Material.STICK);
+            ShapedRecipe philo_pick = new ShapedRecipe(NamespacedKey.minecraft("philo_pick"), philoPick);
+            philo_pick.shape("IGI",
+                    "LSL",
+                    " S ");
 
-        Bukkit.getServer().addRecipe(philo_pick);
+            philo_pick.setIngredient('I', Material.IRON_ORE);
+            philo_pick.setIngredient('G', Material.GOLD_ORE);
+            philo_pick.setIngredient('L', Material.LAPIS_BLOCK);
+            philo_pick.setIngredient('S', Material.STICK);
 
-        ItemStack fortressCompass = new ItemStack(Material.COMPASS);
-        ItemMeta compassMeta = fortressCompass.getItemMeta();
-        assert compassMeta != null;
-        compassMeta.setDisplayName("Fortress Tracker");
-        fortressCompass.setItemMeta(compassMeta);
+            Bukkit.getServer().addRecipe(philo_pick);
+        }
 
-        ShapedRecipe fortress_compass = new ShapedRecipe(NamespacedKey.minecraft("fortress_compass"), fortressCompass);
-        fortress_compass.shape(" B ",
-                "BCB",
-                " B ");
+        if (RecipesVariables.hasFortressTracker) {
+            ItemStack fortressCompass = new ItemStack(Material.COMPASS);
+            ItemMeta compassMeta = fortressCompass.getItemMeta();
+            assert compassMeta != null;
+            compassMeta.setDisplayName("Fortress Tracker");
+            fortressCompass.setItemMeta(compassMeta);
 
-        fortress_compass.setIngredient('B', Material.NETHER_BRICK);
-        fortress_compass.setIngredient('C', Material.COMPASS);
+            ShapedRecipe fortress_compass = new ShapedRecipe(NamespacedKey.minecraft("fortress_compass"), fortressCompass);
+            fortress_compass.shape(" B ",
+                    "BCB",
+                    " B ");
 
-        Bukkit.getServer().addRecipe(fortress_compass);
+            fortress_compass.setIngredient('B', Material.NETHER_BRICK);
+            fortress_compass.setIngredient('C', Material.COMPASS);
+
+            Bukkit.getServer().addRecipe(fortress_compass);
+        }
 
     }
 
     public void initCrafts() {
         for (Player value : Bukkit.getServer().getOnlinePlayers()) {
 
-            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult(), 3);
-            outerCrafts.put(value.getUniqueId(), innerCrafts);
+            if (RecipesVariables.hasIronPack) {
+                innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("iron_pack"))).getResult(), 3);
+                outerCrafts.put(value.getUniqueId(), innerCrafts);
+            }
 
-            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult(), 3);
-            outerCrafts.put(value.getUniqueId(), innerCrafts);
+            if (RecipesVariables.hasGoldPack) {
+                innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("gold_pack"))).getResult(), 3);
+                outerCrafts.put(value.getUniqueId(), innerCrafts);
+            }
 
-            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult(), 3);
-            outerCrafts.put(value.getUniqueId(), innerCrafts);
+            if (RecipesVariables.hasQuickPick) {
+                innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("quick_pick"))).getResult(), 3);
+                outerCrafts.put(value.getUniqueId(), innerCrafts);
+            }
 
-            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult(), 2);
-            outerCrafts.put(value.getUniqueId(), innerCrafts);
+            if (RecipesVariables.hasPhiloPick) {
+                innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("philo_pick"))).getResult(), 2);
+                outerCrafts.put(value.getUniqueId(), innerCrafts);
+            }
 
-            innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult(), 2);
-            outerCrafts.put(value.getUniqueId(), innerCrafts);
+            if (RecipesVariables.hasFortressTracker) {
+                innerCrafts.put(Objects.requireNonNull(Bukkit.getRecipe(NamespacedKey.minecraft("fortress_compass"))).getResult(), 2);
+                outerCrafts.put(value.getUniqueId(), innerCrafts);
+
+            }
 
         }
     }
