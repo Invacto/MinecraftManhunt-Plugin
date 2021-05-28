@@ -47,15 +47,10 @@ public class StartAndReset implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("start")) {
 
-            /*
-
             if (player.getServer().getOnlinePlayers().size() < 2) {
                 player.sendMessage(ChatColor.RED + "There is needs to be at least 2 people on the server!");
                 return true;
             }
-
-
-             */
 
             if (runnerName == null) {
                 player.sendMessage(ChatColor.RED + "There is no runner assigned! (/runner (/r) <USERNAME>)");

@@ -32,7 +32,7 @@ public class ServerReload implements Listener {
     public void showWelcomeText(Player player) {
         player.sendMessage(ChatColor.BLACK + "---------------------------------------------------");
         player.sendMessage(ChatColor.GOLD + "The " + ChatColor.BLUE +
-                "MinecraftManhunt" + ChatColor.GOLD + " plugin by " + ChatColor.DARK_BLUE + "NikiTheSquid" + ChatColor.GOLD +
+                "MinecraftManhunt" + ChatColor.GOLD + " plugin by " + ChatColor.DARK_BLUE + "Invacto" + ChatColor.GOLD +
                 " (Inspired by "+ ChatColor.DARK_BLUE + "Dream" + ChatColor.GOLD + ") is now " + ChatColor.GREEN + "online");
         player.sendMessage(ChatColor.GOLD + "Do" + ChatColor.BLUE + " /mm " + ChatColor.GOLD +" for more info");
         player.sendMessage(ChatColor.BLACK + "---------------------------------------------------");

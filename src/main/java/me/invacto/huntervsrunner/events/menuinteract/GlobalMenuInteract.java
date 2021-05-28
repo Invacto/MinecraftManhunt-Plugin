@@ -46,8 +46,8 @@ public class GlobalMenuInteract implements Listener {
                 }
 
                 if (item.getType() == Material.BOOK) {
-                    RecipesMenu gui = new RecipesMenu();
-                    player.openInventory(gui.getInventory());
+                    RecipesMenu recipesMenu = new RecipesMenu();
+                    player.openInventory(recipesMenu.getInventory());
                     return;
                 }
 

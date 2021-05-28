@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class RecipesMenu implements InventoryHolder {
 
-    private final Inventory inv;
+    public static Inventory inv;
     public static UUID uuid = UUID.randomUUID();
 
     public static Map<String, ItemStack[]> recipesMenu = new HashMap<>();

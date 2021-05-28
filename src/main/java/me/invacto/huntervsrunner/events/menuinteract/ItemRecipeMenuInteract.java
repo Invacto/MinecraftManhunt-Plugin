@@ -26,8 +26,7 @@ public class ItemRecipeMenuInteract implements Listener {
                 ItemStack item = event.getCurrentItem();
 
                 if (item.getType() == Material.ARROW) {
-                    RecipesMenu gui = new RecipesMenu();
-                    player.openInventory(gui.getInventory());
+                    player.openInventory(RecipesMenu.inv);
                 }
 
             }
